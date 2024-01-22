@@ -62,9 +62,12 @@ function render() {
   // Render the freelancer listings
 
   const listings = document.querySelector("ul");
+  const body = document.querySelector("body");
+  body.style.textAlign = "center"
   listings.style.fontSize = "40px";
   const listedElements = freelancers.map((post) => {
     const element = document.createElement("li");
+    element.style.listStyle = "none"
     element.append(post.name, post.title, post.price);
     return element;
   });
