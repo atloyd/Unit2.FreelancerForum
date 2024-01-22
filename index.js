@@ -62,7 +62,7 @@ function render() {
   // Render the freelancer listings
 
   const listings = document.querySelector("ul");
-  listings.style.fontSize = "40px"
+  listings.style.fontSize = "40px";
   const listedElements = freelancers.map((post) => {
     const element = document.createElement("li");
     element.append(post.name, post.title, post.price);
@@ -72,12 +72,12 @@ function render() {
 
   let average = 0;
   freelancers.forEach((post) => {
-    average += (post.price / freelancers.length)
-  })
+    average += post.price / freelancers.length;
+    roundedAverage = Math.floor(average);
+  });
   const p = document.querySelector("p");
-  p.textContent = `Average price is $${average}.`;
-  p.style.fontSize = "40px"
-
+  p.textContent = `Average price is $${roundedAverage}.`;
+  p.style.fontSize = "40px";
 }
 
 function addFreelancer() {
