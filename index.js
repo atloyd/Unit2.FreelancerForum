@@ -44,16 +44,12 @@ const maxListings = 10;
 
 const title = document.querySelector("h1");
 title.textContent = "Feelancer Forum";
-title.style.textAlign = "center";
 title.style.fontSize = "75px";
-
-// Average price will go here
 
 // Availale Freelancers
 
 const h2 = document.querySelector("h2");
 h2.textContent = "Available Freelancers";
-h2.style.textAlign = "center";
 h2.style.fontSize = "50px";
 
 // Set interval
@@ -66,23 +62,35 @@ function render() {
   // Render the freelancer listings
 
   const listings = document.querySelector("ul");
+  listings.style.fontSize = "40px"
   const listedElements = freelancers.map((post) => {
     const element = document.createElement("li");
-    element.textContent = (post.name, post.price, post.title);
+    element.append(post.name, post.title, post.price);
     return element;
   });
   listings.replaceChildren(...listedElements);
+
+  let average = 0;
+  freelancers.forEach((post) => {
+    average += (post.price / freelancers.length)
+  })
+  const p = document.querySelector("p");
+  p.textContent = `Average price is $${average}.`;
+  p.style.fontSize = "40px"
+
 }
 
 function addFreelancer() {
-  const newName = randNames[Math.floor(Math.random() * randNames.length)];
-  const newPrice = randPrice[Math.floor(Math.random() * randPrice.length)];
-  const newTitle = randTitle[Math.floor(Math.random() * randTitle.length)];
-  freelancers.push({ newName, newPrice, newTitle });
+  const name = randNames[Math.floor(Math.random() * randNames.length)];
+  const price = randPrice[Math.floor(Math.random() * randPrice.length)];
+  const title = randTitle[Math.floor(Math.random() * randTitle.length)];
+  freelancers.push({ name, title, price });
 
   render();
 
-  if (freelancers.length === maxListings) {
+  if (freelancers.length >= maxListings) {
     clearInterval(addFreelancerIntervalID);
   }
 }
+
+console.log(freelancers);
